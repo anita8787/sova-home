@@ -34,7 +34,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename="/sova-home">
         <ScrollToTop />
         <Suspense fallback={<LoadingSpinner />}>
           <Routes>

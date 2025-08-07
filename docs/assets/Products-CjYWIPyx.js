@@ -1,4 +1,4 @@
-import{a as V,r as l,j as e,c as w,b as z,L as E}from"./index-LvXR_cCC.js";import{N as W,B}from"./Navigation-DqR2HAe5.js";import{F as Q}from"./Footer-zV3KR0H-.js";import{s as n}from"./sofa-nordic-1-Brn1UZJT.js";import{s as h}from"./sofa-loveseat-1-CwWUIgbf.js";import{H as U}from"./heart-BhYIbE9w.js";/**
+import{a as V,r as l,j as e,c as w,b as z,L as E}from"./index-B6ZIkdPA.js";import{N as W,B}from"./Navigation-DmM_F4Cd.js";import{F as Q}from"./Footer-BqCrQu_B.js";import{s as n}from"./sofa-nordic-1-Brn1UZJT.js";import{s as h}from"./sofa-loveseat-1-CwWUIgbf.js";import{H as U}from"./heart-CykUfITe.js";/**
  * @license lucide-react v0.462.0 - ISC
  *
  * This source code is licensed under the ISC license.
