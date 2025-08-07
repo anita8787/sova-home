@@ -1,12 +1,12 @@
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import CoreValuesSection from '@/components/CoreValuesSection';
 import { Card, CardContent } from '@/components/ui/card';
 import { Heart, Users, Award, Leaf } from 'lucide-react';
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 const About = () => {
-  const [animateValues, setAnimateValues] = useState(false);
   const [animatePhilosophy, setAnimatePhilosophy] = useState(false);
   const [showHeroTitle, setShowHeroTitle] = useState(false);
   const [philosophyImgAnim, setPhilosophyImgAnim] = useState([false, false, false]);
@@ -15,14 +15,7 @@ const About = () => {
   const philosophyTriggered = useRef(false);
   useEffect(() => {
     const handleScroll = () => {
-      const valuesSection = document.getElementById('core-values');
       const philosophySection = document.getElementById('design-philosophy');
-      if (valuesSection) {
-        const rect = valuesSection.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.8) {
-          setAnimateValues(true);
-        }
-      }
       if (philosophySection && !philosophyTriggered.current) {
         const rect = philosophySection.getBoundingClientRect();
         if (rect.top < window.innerHeight * 0.8) {
@@ -38,7 +31,7 @@ const About = () => {
 
   // Hero 標題進場動畫
   useEffect(() => {
-    setTimeout(() => setShowHeroTitle(true), 300);
+    setTimeout(() => setShowHeroTitle(true), 800);
   }, []);
 
   // Our Story 進場動畫
@@ -46,28 +39,6 @@ const About = () => {
     setTimeout(() => setShowStory(true), 800);
   }, []);
 
-  const values = [
-    {
-      icon: Heart,
-      title: '以人為本',
-      description: '每個設計都從使用者的需求出發，創造真正舒適的生活空間'
-    },
-    {
-      icon: Users,
-      title: '家庭連結',
-      description: '透過精心設計的沙發，讓家人之間的互動更加緊密'
-    },
-    {
-      icon: Award,
-      title: '品質堅持',
-      description: '嚴選材質，精工製作，每一件作品都代表我們的承諾'
-    },
-    {
-      icon: Leaf,
-      title: '永續理念',
-      description: '選擇環保材質，為地球盡一份心力，讓美好延續'
-    }
-  ];
 
   return (
     <div className="min-h-screen bg-sova-creamy">
@@ -75,22 +46,35 @@ const About = () => {
       
       {/* Hero Section */}
       <section className="relative py-48 overflow-hidden">
-        {/* 背景圖片 - 換回原本的圖片 */}
+        {/* 背景圖片 - 原本的品牌理念圖片，移除暗色遮罩 */}
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/理念首圖.JPG)' }}>
-          <div className="absolute inset-0 bg-gradient-to-r from-sova-coffee/60 to-sova-coffee/40"></div>
         </div>
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
+        {/* 文字層 - 放在背景和去背圖片之間，位置調整到沙發背後 */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-center">
+          <div className="text-center transform translate-y-4">
             <h1
-              className={`text-6xl md:text-8xl font-bold text-white mb-8 tracking-wider transition-all duration-800 ${showHeroTitle ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-              style={{ transition: 'opacity 0.8s, transform 0.8s' }}
+              className={`text-7xl md:text-9xl font-bold text-white tracking-wider transition-all duration-2000 hover:-translate-y-2 cursor-pointer ${showHeroTitle ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              style={{ 
+                transition: 'opacity 2s ease-out, transform 2s ease-out, all 0.3s ease-in-out',
+                textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+                mixBlendMode: 'overlay'
+              }}
             >
               about sova
             </h1>
-            <p className="text-xl text-sova-secondary max-w-2xl mx-auto leading-relaxed">
-              生活儀式感從沙發開始，我們相信每個家庭都值得擁有完美的休憩空間
-            </p>
+          </div>
+        </div>
+        
+        {/* 去背沙發圖片 - 疊加在最前面，與背景沙發完全重疊 */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="relative w-full h-full">
+            <img 
+              src="/理念首圖去背.png" 
+              alt="Sova Sofa" 
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ zIndex: 20 }}
+            />
           </div>
         </div>
       </section>
@@ -126,54 +110,8 @@ const About = () => {
           </div>
         </div>
       </section>
-
-      {/* Core Values */}
-      <section id="core-values" className="py-40 relative overflow-hidden">
-        {/* 背景圖片 - 品牌理念核心圖 */}
-        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/品牌理念核心圖.JPG)' }}>
-          <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/60 to-black/80"></div>
-        </div>
-        
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* 大標題文字 - 白色粗體，置中 */}
-          <div className="text-center mb-24">
-            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-wide mb-4">
-              核心價值
-            </h2>
-            <p className="text-lg text-white/90 max-w-2xl mx-auto">
-              指引我們前進的四大理念
-            </p>
-          </div>
-          
-          {/* 四個圓圈容器，單排排列 */}
-          <div className="flex justify-center">
-            <div className="flex justify-center space-x-6 md:space-x-8 lg:space-x-10">
-              {values.map((value, index) => (
-                <div key={index} className={`group transition-all duration-700 ${animateValues ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: `${index * 200}ms` }}>
-                  {/* 圓圈容器 - 毛玻璃質感，縮小尺寸 */}
-                  <div className="w-36 h-36 md:w-40 md:h-40 lg:w-44 lg:h-44 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex flex-col items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105 p-4">
-                    {/* 圖標 */}
-                    <div className="mb-3">
-                      <value.icon className="h-6 w-6 md:h-7 md:w-7 lg:h-8 lg:w-8 text-white group-hover:text-sova-accent transition-colors duration-300" />
-                    </div>
-                    
-                    {/* 標題 */}
-                    <h3 className="text-sm md:text-base font-bold text-white mb-2 group-hover:text-sova-accent transition-colors duration-300 text-center">
-                      {value.title}
-                    </h3>
-                    
-                    {/* 描述文字 */}
-                    <p className="text-xs text-white/80 leading-relaxed text-center">
-                      {value.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
+      {/* Core Values - 新設計 */}
+      <CoreValuesSection />
               {/* 設計理念 */}
         <section id="design-philosophy" className="py-32 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -203,9 +141,9 @@ const About = () => {
               />
             </div>
             {/* 懸停遮罩 - 從底部開始 */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end">
-              <div className="text-white p-4 w-full">
-                <h3 className="text-lg font-bold mb-2">簡約而不簡單</h3>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end">
+              <div className="text-white p-10 w-full min-h-[200px] flex flex-col justify-end">
+                <h3 className="text-lg font-bold mb-4">簡約而不簡單</h3>
                 <p className="text-sm leading-relaxed">
                   我們相信真正的美來自於簡約的設計。每一條線條、每一個角度都經過精心計算，
                   去除多餘的裝飾，讓沙發本身的美感自然流露。
@@ -229,9 +167,9 @@ const About = () => {
               />
             </div>
             {/* 懸停遮罩 - 從底部開始 */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end">
-              <div className="text-white p-4 w-full">
-                <h3 className="text-lg font-bold mb-2">功能與美學並重</h3>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end">
+              <div className="text-white p-10 w-full min-h-[200px] flex flex-col justify-end">
+                <h3 className="text-lg font-bold mb-4">功能與美學並重</h3>
                 <p className="text-sm leading-relaxed">
                   除了視覺上的美感，我們更注重實用性。從人體工學的角度出發，
                   確保每一張沙發都能提供最佳的舒適度，讓使用者真正享受放鬆的時光。
@@ -255,9 +193,9 @@ const About = () => {
               />
             </div>
             {/* 懸停遮罩 - 從底部開始 */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end">
-              <div className="text-white p-4 w-full">
-                <h3 className="text-lg font-bold mb-2">永續的設計思維</h3>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end">
+              <div className="text-white p-10 w-full min-h-[200px] flex flex-col justify-end">
+                <h3 className="text-lg font-bold mb-4">永續的設計思維</h3>
                 <p className="text-sm leading-relaxed">
                   我們選擇環保材質，採用可持續的生產方式，讓每一件作品都能陪伴您更久，
                   同時也為地球盡一份心力。

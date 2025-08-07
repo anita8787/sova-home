@@ -1,0 +1,22 @@
+  const values = [
+    {
+      icon: Heart,
+      title: '以人為本',
+      description: '從使用者出發，設計真正舒適的空間'
+    },
+    {
+      icon: Users,
+      title: '家庭連結',
+      description: '沙發拉近彼此距離，讓交流更自然'
+    },
+    {
+      icon: Award,
+      title: '品質堅持',
+      description: '嚴選材質，精工製作，傳遞我們的承諾'
+    },
+    {
+      icon: Leaf,
+      title: '永續理念',
+      description: '選用環保材質，讓美好延續'
+    }
+  ];

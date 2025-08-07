@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
 
 const archImages = [
   { src: '/p2 img3.JPG', alt: '舒適溫馨的沙發成品', caption: '舒適溫馨的沙發成品' },
@@ -8,6 +8,78 @@ const archImages = [
 
 const CraftSection = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  // 滑鼠按下事件
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    if (!scrollRef.current) return;
+    
+    setIsDragging(true);
+    setStartX(e.pageX - scrollRef.current.offsetLeft);
+    setScrollLeft(scrollRef.current.scrollLeft);
+    
+    // 改變游標樣式
+    scrollRef.current.style.cursor = 'grabbing';
+  }, []);
+
+  // 滑鼠移動事件
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!isDragging || !scrollRef.current) return;
+    
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 2; // 調整拖拽敏感度
+    scrollRef.current.scrollLeft = scrollLeft - walk;
+  }, [isDragging, startX, scrollLeft]);
+
+  // 滑鼠放開事件
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false);
+    if (scrollRef.current) {
+      scrollRef.current.style.cursor = 'grab';
+    }
+  }, []);
+
+  // 滑鼠離開事件
+  const handleMouseLeave = useCallback(() => {
+    setIsDragging(false);
+    setHoveredIndex(null);
+    if (scrollRef.current) {
+      scrollRef.current.style.cursor = 'grab';
+    }
+  }, []);
+
+  // 滾動監聽器 - 計算滾動進度
+  const handleScroll = useCallback(() => {
+    if (!scrollRef.current) return;
+    
+    const container = scrollRef.current;
+    const scrollPosition = container.scrollLeft;
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    
+    // 計算滾動進度 (0 到 1)
+    const progress = maxScroll > 0 ? scrollPosition / maxScroll : 0;
+    setScrollProgress(Math.max(0, Math.min(1, progress)));
+  }, []);
+
+  // 監聽滾動事件
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    container.addEventListener('scroll', handleScroll);
+    
+    // 初始化滾動進度
+    handleScroll();
+    
+    return () => {
+      container.removeEventListener('scroll', handleScroll);
+    };
+  }, [handleScroll]);
 
   return (
     <section className="py-44 w-full relative" style={{ 
@@ -39,60 +111,140 @@ const CraftSection = () => {
       {/* 專業左右分區結構 */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex">
-          {/* 左側：圖片橫向滾動區塊 (60% 寬度) */}
-          <div className="w-[60%] relative">
+          {/* 左側：圖片橫向滾動區塊 (60% 寬度) - 添加邊界控制 */}
+          <div className="w-[60%] relative" style={{ overflow: 'hidden' }}>
             <div className="flex flex-col items-center justify-center h-full">
-              {/* 圖片滾動容器 - 確保可以滾動 */}
+              {/* 圖片滾動容器 - 隱藏原生滾動條 */}
               <div 
                 ref={scrollRef}
-                className="flex gap-8 overflow-x-auto horizontal-scroll pb-2"
+                className="flex gap-8 overflow-x-auto select-none"
                 style={{ 
                   scrollSnapType: 'x mandatory', 
-                  scrollBehavior: 'smooth',
+                  scrollBehavior: isDragging ? 'auto' : 'smooth',
                   width: '100%',
-                  maxWidth: '100%'
+                  maxWidth: '100%',
+                  cursor: 'grab',
+                  paddingBottom: '1rem',
+                  paddingTop: '3rem',
+                  paddingLeft: '2rem',
+                  paddingRight: '2rem',
+                  // 隱藏所有瀏覽器的原生滾動條
+                  scrollbarWidth: 'none', // Firefox
+                  msOverflowStyle: 'none', // IE and Edge
+                  WebkitOverflowScrolling: 'touch', // iOS
                 }}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseLeave}
               >
                 {/* 左邊間距，讓第一張圖被裁切 */}
-                <div className="flex-none w-16"></div>
+                <div className="flex-none w-8"></div>
                 
                 {archImages.map((img, idx) => (
-                  <div key={idx} className="flex flex-col items-center flex-none w-56 md:w-72">
+                  <div 
+                    key={idx} 
+                    className="flex flex-col items-center flex-none w-56 md:w-72 relative"
+                    onMouseEnter={() => setHoveredIndex(idx)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    style={{
+                      // 為每個圖片容器設置適當的空間
+                      padding: '1rem 0.5rem',
+                      scrollSnapAlign: 'center'
+                    }}
+                  >
                     <div
-                      className="h-80 md:h-96 bg-white border-4 border-[#B97A56] mb-4"
+                      className="relative h-80 md:h-96 bg-white border-4 border-[#B97A56] mb-4 transition-all duration-300 ease-out"
                       style={{
                         borderTopLeftRadius: '9999px',
                         borderTopRightRadius: '9999px',
                         borderBottomLeftRadius: '0',
                         borderBottomRightRadius: '0',
                         objectFit: 'cover',
-                        boxShadow: '0 6px 20px rgba(0,0,0,0.12), 0 3px 10px rgba(0,0,0,0.08)'
+                        boxShadow: hoveredIndex === idx 
+                          ? '0 15px 35px rgba(0,0,0,0.2), 0 8px 15px rgba(0,0,0,0.12)'
+                          : '0 6px 20px rgba(0,0,0,0.12), 0 3px 10px rgba(0,0,0,0.08)',
+                        // 調整放大效果：減少放大倍數，主要向上和左右均勻放大
+                        transform: hoveredIndex === idx 
+                          ? 'scale(1.05) translateY(-8px)' 
+                          : 'scale(1)',
+                        // 降低 z-index，避免擋到右側內容
+                        zIndex: hoveredIndex === idx ? 20 : 10,
+                        // 確保放大不會超出左側區域邊界
+                        maxWidth: '100%'
                       }}
                     >
                       <img
                         src={img.src}
                         alt={img.alt}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover pointer-events-none"
                         style={{
                           borderTopLeftRadius: '9999px',
                           borderTopRightRadius: '9999px',
                           borderBottomLeftRadius: '0',
                           borderBottomRightRadius: '0',
                         }}
+                        draggable={false}
                       />
+                      
+                      {/* 懸停時的微妙光暈效果 */}
+                      {hoveredIndex === idx && (
+                        <div 
+                          className="absolute inset-0 pointer-events-none transition-opacity duration-300"
+                          style={{
+                            background: 'linear-gradient(135deg, rgba(185, 122, 86, 0.08) 0%, rgba(255, 255, 255, 0.15) 50%, rgba(185, 122, 86, 0.08) 100%)',
+                            borderTopLeftRadius: '9999px',
+                            borderTopRightRadius: '9999px',
+                            borderBottomLeftRadius: '0',
+                            borderBottomRightRadius: '0',
+                          }}
+                        />
+                      )}
                     </div>
-                    <div className="text-center text-base font-semibold text-[#7B4B27]">{img.caption}</div>
+                    <div 
+                      className="text-center text-base font-semibold text-[#7B4B27] pointer-events-none transition-all duration-300"
+                      style={{
+                        transform: hoveredIndex === idx ? 'translateY(-3px)' : 'translateY(0)',
+                        opacity: hoveredIndex === idx ? 0.9 : 1
+                      }}
+                    >
+                      {img.caption}
+                    </div>
                   </div>
                 ))}
                 
                 {/* 右邊間距 */}
-                <div className="flex-none w-16"></div>
+                <div className="flex-none w-8"></div>
+              </div>
+              
+              {/* 品牌色系短進度條 */}
+              <div className="flex justify-center mt-6">
+                <div className="relative">
+                  {/* 背景軌道 */}
+                  <div 
+                    className="h-1 rounded-full"
+                    style={{
+                      width: '80px', // 較短的進度條
+                      backgroundColor: '#D4C4B0',
+                      opacity: 0.4
+                    }}
+                  />
+                  {/* 進度指示 */}
+                  <div 
+                    className="absolute top-0 left-0 h-1 rounded-full transition-all duration-200 ease-out"
+                    style={{
+                      width: `${scrollProgress * 80}px`, // 根據滾動進度調整寬度
+                      backgroundColor: '#B97A56',
+                      boxShadow: '0 0 6px rgba(185, 122, 86, 0.4)'
+                    }}
+                  />
+                </div>
               </div>
             </div>
           </div>
 
-          {/* 右側：cozy 內容區塊 (40% 寬度) */}
-          <div className="w-[40%] relative pl-8">
+          {/* 右側：cozy 內容區塊 (40% 寬度) - 確保不被遮擋 */}
+          <div className="w-[40%] relative pl-8" style={{ zIndex: 30 }}>
             <div className="relative" style={{minHeight:'320px'}}>
               {/* 背後大 cozy 字與紅圈圈，只在 cozy 內容區塊內，調整位置避免過度重疊 */}
               <span

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -181,4 +183,119 @@ All colors MUST be HSL.
     box-shadow: none;
     transition: none;
   }
+}
+/* 隱藏滾動條但保持滾動功能 - 全局樣式 */
+.overflow-x-auto::-webkit-scrollbar {
+  display: none;
+}
+
+.overflow-x-auto {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* 產品目錄頁面專用樣式 */
+.product-hero-title {
+  font-family: 'Playfair Display', 'Noto Serif TC', serif;
+  letter-spacing: -0.02em;
+}
+
+.product-content-text {
+  font-family: 'Inter', 'Noto Sans TC', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* 響應式文字大小優化 */
+@media (max-width: 640px) {
+  .product-hero-title {
+    font-size: 2.5rem;
+    line-height: 1.1;
+  }
+}
+
+/* 商品卡片hover效果在行動裝置上禁用 */
+@media (hover: none) and (pointer: coarse) {
+  .group:hover .group-hover\:scale-110 {
+    transform: none !important;
+  }
+  
+  .group:hover .group-hover\:scale-105 {
+    transform: none !important;
+  }
+}
+
+/* 觸控友善的按鈕設計 */
+@media (max-width: 640px) {
+  button, .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* 篩選chips的橫向滾動優化 */
+.filter-chips-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.filter-chips-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* 文字截斷樣式 */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 柔和過場動畫 */
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 商品卡片陰影優化 */
+.product-card-shadow {
+  box-shadow: 0 4px 12px -2px rgba(44, 44, 44, 0.08), 0 2px 8px -2px rgba(44, 44, 44, 0.04);
+}
+
+.product-card-shadow:hover {
+  box-shadow: 0 8px 25px -5px rgba(44, 44, 44, 0.12), 0 4px 15px -3px rgba(44, 44, 44, 0.08);
+}
+
+/* 產品卡片快速查看按鈕優化 */
+.product-quick-view-btn {
+  background: linear-gradient(135deg, #B57E4F 0%, #A06F40 100%);
+  transition: all 0.2s ease-in-out;
+}
+
+.product-quick-view-btn:hover {
+  background: linear-gradient(135deg, #432818 0%, #2A1A0F 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(67, 40, 24, 0.3);
+}
+
+/* 圖片容器優化 */
+.product-image-container {
+  background: linear-gradient(135deg, #f8f8f8 0%, #f0f0f0 100%);
 }

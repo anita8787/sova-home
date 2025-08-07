@@ -258,7 +258,7 @@ const EnhancedNavigation = () => {
       )}
 
       {/* 購物車抽屜 */}
-      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      <CartDrawer open={isCartOpen} onClose={() => setIsCartOpen(false)} />
       
       {/* 導航高度佔位 */}
       <div className="h-16 md:h-20" />

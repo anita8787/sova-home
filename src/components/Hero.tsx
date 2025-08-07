@@ -44,7 +44,7 @@ const Hero = () => {
           <Button
             size="lg"
             onClick={handleExploreProducts}
-            className="flex items-center gap-2 px-6 py-2 rounded-full shadow transition-colors duration-200"
+            className="group flex items-center gap-2 px-6 py-2 rounded-full shadow transition-colors duration-200"
             style={{
               background: '#B57E4F',
               color: '#FFF8EE',
@@ -57,11 +57,11 @@ const Hero = () => {
               letterSpacing: '0.02em',
               borderRadius: '999px',
             }}
-            onMouseOver={e => { e.currentTarget.style.background = '#FAB44F'; e.currentTarget.style.color = '#A68A6E'; }}
+            onMouseOver={e => { e.currentTarget.style.background = '#FAB44F'; e.currentTarget.style.color = '#432818'; }}
             onMouseOut={e => { e.currentTarget.style.background = '#B57E4F'; e.currentTarget.style.color = '#FFF8EE'; }}
           >
             探索產品
-            <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-2" />
+            <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-[0.3rem]" />
           </Button>
         </AnimatedContent>
       </div>

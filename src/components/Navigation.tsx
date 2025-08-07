@@ -79,36 +79,36 @@ const Navigation = () => {
           {/* 搜尋功能 */}
           <div className="relative flex items-center">
             {showSearch && (
-              <input
-                type="text"
-                className="absolute right-12 top-1/2 -translate-y-1/2 w-56 h-10 rounded-lg bg-white border border-gray-200 shadow px-4 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-sova-cocoa transition-all duration-200"
-                placeholder="Search"
-                autoFocus
-                style={{ zIndex: 100, boxShadow: '0 2px 8px 0 rgba(0,0,0,0.08)' }}
-                value={searchValue}
-                onChange={e => setSearchValue(e.target.value)}
-                onBlur={() => setShowSearch(false)}
-              />
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center bg-white border border-gray-200 shadow-lg transition-all duration-300 ease-in-out" style={{ borderRadius: '9999px', zIndex: 100 }}>
+                <input
+                  type="text"
+                  className="w-40 h-10 bg-transparent border-none outline-none px-4 text-gray-900 placeholder-gray-400"
+                  placeholder="Searching..."
+                  autoFocus
+                  value={searchValue}
+                  onChange={e => setSearchValue(e.target.value)}
+                  onBlur={() => setShowSearch(false)}
+                  style={{ borderRadius: '9999px' }}
+                />
+                <div className="w-8 h-8 rounded-full bg-amber-200 hover:bg-amber-300 transition-colors duration-200 flex items-center justify-center mr-1">
+                  <Search className="h-4 w-4 text-gray-700" />
+                </div>
+              </div>
             )}
             <button
-              className="p-2 rounded-full hover:bg-gray-100 transition-colors transform transition-transform duration-200"
+              className="p-2 rounded-full hover:bg-gray-100 transition-all duration-300 ease-in-out transform hover:scale-110"
               aria-label="搜尋"
-              style={{ transition: 'transform 0.2s' }}
-              onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.15)'}
-              onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-              onClick={e => {
+              onClick={() => {
                 if (showSearch) {
                   setShowSearch(false);
-                  // 讓 input 失焦
-                  const input = document.querySelector('input[placeholder="Search"]') as HTMLInputElement;
-                  if (input) input.blur();
+                  setSearchValue("");
                 } else {
                   setShowSearch(true);
                 }
               }}
             >
-               <Search className="h-5 w-5 text-sova-cocoa" />
-             </button>
+              <Search className="h-5 w-5 text-sova-cocoa" />
+            </button>
           </div>
           {/* 個人資料頁跳轉 */}
           <button

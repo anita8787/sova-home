@@ -55,7 +55,8 @@ const FeaturedProducts = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {products.map((product) => (
             <AnimatedContent key={product.id} distance={60} direction="vertical" duration={0.8} ease="power3.out" delay={product.id * 0.1}>
-              <Card className="group cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-2 bg-white border-0 shadow-sm overflow-hidden">
+              <Link to={`/products/${product.id}`}>
+                <Card className="group cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-2 bg-white border-0 shadow-sm overflow-hidden">
                 <div className="relative overflow-hidden">
                   <img
                     src={product.image}
@@ -77,7 +78,7 @@ const FeaturedProducts = () => {
                     </span>
                     <Button 
                       size="sm" 
-                      className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      className="opacity-0 group-hover:opacity-100 transition-all duration-300 hover:shadow-md hover:scale-105 pointer-events-none"
                       style={{
                         background: '#B57E4F',
                         color: '#FFF8EE',
@@ -85,14 +86,13 @@ const FeaturedProducts = () => {
                         border: 'none',
                         borderRadius: '6px',
                       }}
-                      onMouseOver={e => { e.currentTarget.style.background = '#FAB44F'; e.currentTarget.style.color = '#A68A6E'; }}
-                      onMouseOut={e => { e.currentTarget.style.background = '#B57E4F'; e.currentTarget.style.color = '#FFF8EE'; }}
                     >
                       查看詳情
                     </Button>
                   </div>
                 </CardContent>
               </Card>
+              </Link>
             </AnimatedContent>
           ))}
         </div>
@@ -102,7 +102,7 @@ const FeaturedProducts = () => {
             <Button
               asChild
               size="lg"
-              className="inline-flex items-center gap-2 px-6 py-2 rounded-full shadow transition-colors duration-200"
+              className="group inline-flex items-center gap-2 px-6 py-2 rounded-full shadow transition-colors duration-200"
               style={{
                 background: '#B57E4F',
                 color: '#FFF8EE',
@@ -115,12 +115,12 @@ const FeaturedProducts = () => {
                 letterSpacing: '0.02em',
                 borderRadius: '999px',
               }}
-              onMouseOver={e => { e.currentTarget.style.background = '#FAB44F'; e.currentTarget.style.color = '#A68A6E'; }}
+              onMouseOver={e => { e.currentTarget.style.background = '#FAB44F'; e.currentTarget.style.color = '#432818'; }}
               onMouseOut={e => { e.currentTarget.style.background = '#B57E4F'; e.currentTarget.style.color = '#FFF8EE'; }}
             >
               <Link to="/products" className="flex items-center">
                 查看所有產品
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-2" />
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-[0.3rem]" />
               </Link>
             </Button>
           </AnimatedContent>
