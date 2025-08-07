@@ -90,7 +90,7 @@ const CraftSection = () => {
       <div 
         className="absolute inset-0 pointer-events-none z-0" 
         style={{
-          backgroundImage: 'url(/texture.jpg)',
+          backgroundImage: 'url(/sova-home/texture.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',

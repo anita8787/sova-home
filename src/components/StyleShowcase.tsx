@@ -82,7 +82,7 @@ const StyleShowcase = () => {
       ref={sectionRef}
       className="py-20 relative overflow-hidden"
       style={{
-        backgroundImage: "url('/wood texture.jpg')",
+        backgroundImage: "url('/sova-home/wood texture.jpg')",
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',

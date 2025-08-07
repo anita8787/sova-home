@@ -38,7 +38,7 @@ const Navigation = () => {
         <div className="flex items-center space-x-8 ml-6">
           <Link to="/" className="flex items-center space-x-2">
             <img 
-              src="/logo.png" 
+              src="/sova-home/logo.png" 
               alt="SOVA Logo" 
               className="h-20 md:h-32 w-auto object-contain"
               style={{ filter: 'brightness(0) saturate(100%) sepia(60%) hue-rotate(-20deg) brightness(0.7)' }}

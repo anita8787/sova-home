@@ -34,7 +34,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between py-4">
           {/* 左側 LOGO 區塊 */}
           <div className="flex-shrink-0 flex items-center md:items-center md:mb-0 mb-4 pl-0 md:pl-0" style={{ minWidth: 'auto' }}>
-            <img src="/logo.png" alt="品牌LOGO" className="h-36 md:h-72 w-auto object-contain -ml-10" style={{ filter: 'brightness(0) invert(1)', opacity: 1 }} />
+            <img src="/sova-home/logo.png" alt="品牌LOGO" className="h-36 md:h-72 w-auto object-contain -ml-10" style={{ filter: 'brightness(0) invert(1)', opacity: 1 }} />
           </div>
 
           {/* 中間四欄連結 + 右側資訊區塊，並排且頂端對齊 */}

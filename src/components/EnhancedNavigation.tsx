@@ -57,7 +57,7 @@ const EnhancedNavigation = () => {
             >
               <div className="relative">
                 <img 
-                  src="/logo.png" 
+                  src="/sova-home/logo.png" 
                   alt="SOVA 溫感家居" 
                   className={`transition-all duration-300 ${
                     isScrolled ? 'h-8 md:h-10' : 'h-10 md:h-12'

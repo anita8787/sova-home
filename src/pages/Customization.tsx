@@ -152,7 +152,7 @@ const Customization = () => {
           left: 0,
           width: '100%',
           height: '100%',
-          backgroundImage: "url('/water texture.jpg')",
+          backgroundImage: "url('/sova-home/water texture.jpg')",
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',

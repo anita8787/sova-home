@@ -20,10 +20,10 @@ const CoreValuesSection = () => {
   });
 
   const coreValues: CoreValue[] = [
-    { id: 1, title: "品質堅持", englishTitle: "QUALITY", description: "只為打造一張真正能陪伴生活的沙發\n我們選用高品質結構與面料，強調木作基底的穩定性與職人工藝，讓沙發不只是風格，更是生活裡可靠的依靠。", image: "/品質堅持.jpg", corner: "bottom-right" },
-    { id: 2, title: "以人為本", englishTitle: "HUMAN-CENTERED", description: "從使用者出發，設計你真正需要的沙發\n不管是租屋族、小家庭，或是重視生活品味的人，我們從實際使用情境出發，關注日常習慣與細節設計，讓沙發真正貼近你的日常。", image: "/以人為本.jpg", corner: "top-right" },
-    { id: 3, title: "設計美學", englishTitle: "AESTHETICS", description: "北歐線條 × 美式溫暖 × 圓潤親和力\n融合北歐的簡約美學與美式的溫暖氛圍，沙發設計講究比例與觸感，展現低調卻不單調的風格，無論任何空間都能成為視覺亮點。", image: "/設計美學.jpg", corner: "top-left" },
-    { id: 4, title: "靈動模組", englishTitle: "MODULAR", description: "因空間而變，為生活而動\n跳脫傳統模組沙發僅能「換位置」的框架，打造真正能自由變形、輕鬆拼接的靈活設計。不只移動，還能應對各種租屋場景與空間限制，讓小坪數也能創造最大可能。", image: "/北歐.png", corner: "bottom-left" }
+    { id: 1, title: "品質堅持", englishTitle: "QUALITY", description: "只為打造一張真正能陪伴生活的沙發\n我們選用高品質結構與面料，強調木作基底的穩定性與職人工藝，讓沙發不只是風格，更是生活裡可靠的依靠。", image: "/sova-home/品質堅持.jpg", corner: "bottom-right" },
+    { id: 2, title: "以人為本", englishTitle: "HUMAN-CENTERED", description: "從使用者出發，設計你真正需要的沙發\n不管是租屋族、小家庭，或是重視生活品味的人，我們從實際使用情境出發，關注日常習慣與細節設計，讓沙發真正貼近你的日常。", image: "/sova-home/以人為本.jpg", corner: "top-right" },
+    { id: 3, title: "設計美學", englishTitle: "AESTHETICS", description: "北歐線條 × 美式溫暖 × 圓潤親和力\n融合北歐的簡約美學與美式的溫暖氛圍，沙發設計講究比例與觸感，展現低調卻不單調的風格，無論任何空間都能成為視覺亮點。", image: "/sova-home/設計美學.jpg", corner: "top-left" },
+    { id: 4, title: "靈動模組", englishTitle: "MODULAR", description: "因空間而變，為生活而動\n跳脫傳統模組沙發僅能「換位置」的框架，打造真正能自由變形、輕鬆拼接的靈活設計。不只移動，還能應對各種租屋場景與空間限制，讓小坪數也能創造最大可能。", image: "/sova-home/北歐.png", corner: "bottom-left" }
   ];
 
   useEffect(() => {

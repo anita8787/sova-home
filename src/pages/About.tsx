@@ -47,7 +47,7 @@ const About = () => {
       {/* Hero Section */}
       <section className="relative py-48 overflow-hidden">
         {/* 背景圖片 - 原本的品牌理念圖片，移除暗色遮罩 */}
-        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/理念首圖.JPG)' }}>
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/sova-home/理念首圖.JPG)' }}>
         </div>
         
         {/* 文字層 - 放在背景和去背圖片之間，位置調整到沙發背後 */}
@@ -70,7 +70,7 @@ const About = () => {
         <div className="absolute inset-0 pointer-events-none">
           <div className="relative w-full h-full">
             <img 
-              src="/理念首圖去背.png" 
+              src="/sova-home/理念首圖去背.png" 
               alt="Sova Sofa" 
               className="absolute inset-0 w-full h-full object-cover"
               style={{ zIndex: 20 }}
@@ -135,7 +135,7 @@ const About = () => {
           >
             <div className="w-full h-[500px]">
               <img 
-                src="/c1.jpg" 
+                src="/sova-home/c1.jpg" 
                 alt="簡約而不簡單" 
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
@@ -161,7 +161,7 @@ const About = () => {
           >
             <div className="w-full h-[500px]">
               <img 
-                src="/c2.jpg" 
+                src="/sova-home/c2.jpg" 
                 alt="功能與美學並重" 
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
@@ -187,7 +187,7 @@ const About = () => {
           >
             <div className="w-full h-[500px]">
               <img 
-                src="/c3.jpg" 
+                src="/sova-home/c3.jpg" 
                 alt="永續的設計思維" 
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />

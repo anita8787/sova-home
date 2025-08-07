@@ -285,7 +285,7 @@ const Products = () => {
         {/* 背景圖片 */}
         <div className="relative w-full h-[50vh] md:h-[55vh] lg:h-[60vh] overflow-hidden">
           <img
-            src="/產品形象照.jpg"
+            src="/sova-home/產品形象照.jpg"
             alt="精選沙發系列"
             className="w-full h-full object-cover"
           />
